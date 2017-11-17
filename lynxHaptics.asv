@@ -15,6 +15,7 @@ global floor2_texturesurface1
 global floor3_viscussurface
 global floor4_texturesurface2
 global floor5_flat
+%global floor6_attractionfield
 global floor7_flat
 global floor8_gravity_fall
 global floor9_viscussurface1
@@ -23,11 +24,10 @@ global vsmooth
 global spx
 global spy
 global spz
-global spx_attractive
+global spx
 global spy_attractive
 global spz_attractive
 global rad_sph
-global rad_sph_attractive
 
 figClosed = 0;
 qs = [0,0,0]; % initialize robot to zero pose
@@ -57,11 +57,14 @@ shz=0;
 
 large_button_1 = fill3( [sx*600+shx sx*600+shx sx*600+shx sx*600+shx],[sy*0+shy sy*0+shy sy*-400+shy sy*-400+shy], [sz*600+shz sz*800+shz sz*800+shz sz*600+shz], [1 0 0], 'facealpha', 0.8);
 floor1_flat = fill3( [sx*200+shx sx*600+shx sx*600+shx sx*200+shx], [sy*0+shy sy*0+shy sy*-400+shy sy*-400+shy],[sz*600+shz sz*600+shz sz*600+shz sz*600+shz], [0 1 0], 'facealpha', 0.5);
+ %loor1button1 = fill3([-100 -100 -300 -300], [425 550 550 425], [601 601 601 601], [0.7 0 0], 'facealpha', 0.3);
+ %floor1button2 = fill3([-100 -100 -300 -300], [250 375 375 250], [601 601 601 601], [0.7 0 0], 'facealpha', 0.3);
 floor2_texturesurface1 = fill3( [sx*-200+shx sx*200+shx sx*200+shx sx*-200+shx],[sy*0+shy sy*0+shy sy*-400+shy sy*-400+shy], [sz*200+shz sz*600+shz sz*600+shz sz*200+shz], [1 1 0], 'facealpha', 0.5);
 floor3_viscussurface = fill3( [sx*-600+shx sx*-200+shx sx*-200+shx sx*-600+shx],[sy*0+shy sy*0+shy sy*-400+shy sy*-400+shy], [sz*200+shz sz*200+shz sz*200+shz sz*200+shz], [0 0 1], 'facealpha', 0.5);
 
 floor4_texturesurface2 = fill3( [sx*-200+shx sx*-200+shx sx*-600+shx sx*-600+shx], [sy*400+shy sy*0+shy sy*0+shy sy*400+shy],[sz*-200+shz sz*200+shz sz*200+shz sz*-200+shz], [1 1 0], 'facealpha', 0.5);
 floor5_flat = fill3( [sx*-200+shx sx*-200+shx sx*-600+shx sx*-600+shx],[sy*800+shy sy*400+shy sy*400+shy sy*800+shy], [sz*-200+shz sz*-200+shz sz*-200+shz sz*-200+shz], [0 1 0], 'facealpha', 0.5);
+%floor6_attractionfield = fill3( [sx*-600+shx sx*-600+shx sx*-600+shx sx*-600+shx],[sy*400+shy sy*800+shy sy*800+shy sy*400+shy], [sz*-200+shz sz*-200+shz sz*0+shz sz*0+shz], [0 1 0], 'facealpha', 0.5);
 
 floor7_flat = fill3( [sx*-200+shx sx*-200+shx sx*-100+shx sx*-100+shx],[sy*800+shy sy*400+shy sy*400+shy sy*800+shy], [sz*-200+shz sz*-200+shz sz*-200+shz sz*-200+shz], [0 1 0], 'facealpha', 0.5);
 floor8_gravity_fall = fill3( [sx*0+shx sx*0+shx sx*-100+shx sx*-100+shx],[sy*800+shy sy*400+shy sy*400+shy sy*800+shy], [sz*-300+shz sz*-300+shz sz*-300+shz sz*-300+shz], [0 1 0], 'facealpha', 0.5);
@@ -69,23 +72,25 @@ floor9_viscussurface1 = fill3([sx*0+shx sx*0+shx sx*200+shx sx*200+shx],[sy*800+
 
 floor10_button = fill3( [sx*200+shx sx*200+shx sx*400+shx sx*400+shx], [sy*800+shy sy*400+shy sy*400+shy sy*800+shy], [sz*-200+shz sz*-200+shz sz*-200+shz sz*-200+shz], [1 0 0], 'facealpha', 0.8);
 told=0;
-
 %attractive
 [x,y,z] = sphere;
-  rad_sph_attractive=30;
+  rad_sph=30;
    spx_attractive=200;
    spy_attractive=130;
    spz_attractive=-50;
- hsphere2= surf(x*rad_sph_attractive+spx_attractive, y*rad_sph_attractive+spy_attractive, z*rad_sph_attractive+spz_attractive, 'facealpha', 0.8);
+ hsphere2= surf(x*rad_sph+spx_attractive, y*rad_sph+spy_attractive, z*rad_sph+spz_attractive, 'facealpha', 0.8);
  hsphere2.EdgeColor = 'none';
- 
-%ball
+ %ball
+
  [x,y,z] = sphere;
-  rad_sph=15;
+  r=15;
    spx=150;
    spy=180;
    spz=-45;
- hsphere1= surf(x*rad_sph+spx, y*rad_sph+spy, z*rad_sph+spz);
+ hsphere1= surf(x*r+spx, y*r+spy, z*r+spz);
+%hsphere1.get
+%hsphere1.XData
+%floor1_flat = fill3([200 100 100 200], [-100 -100 100 100], [200 200 200 200], [0.7 0 0], 'facealpha', 0.3);
 
 hold off;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -110,7 +115,7 @@ while(1)
     posEEold= posEE;
     posEE = computeEEposition();
     if count==0
-        v=[0,0,0] ;
+        v=0 ;
     else
         v=(posEE-posEEold)/told;
     end
@@ -133,7 +138,7 @@ while(1)
         figClosed = drawLynx(h1, h2, F);
         [xhan,yhan,zhan]=sphere;
         spy=spy+dir_step;
-        set(hsphere1, 'XData',xhan*rad_sph+spx, 'YData',yhan*rad_sph+spy, 'ZData',zhan*rad_sph+spz);
+        set(hsphere1, 'XData',xhan*r+spx, 'YData',yhan*r+spy, 'ZData',zhan*r+spz);
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         % Set handles for interactive objects you make here
@@ -169,6 +174,6 @@ while(1)
     %Tau'
     %[posEE, qs, F', Tau']
      count=count+1;
-     told=toc
+     told=toc;
     i = mod(i+1, frameSkip);
 end

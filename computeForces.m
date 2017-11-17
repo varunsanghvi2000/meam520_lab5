@@ -5,9 +5,12 @@ function F = computeForces()
 F = [0;0;0];
 
 %spring constant
-k=0.5;
+k=0.0005;
 button_stiffness=0.9;
 c=0.2;
+attraction_field=0.5;
+ball_force=0.8;
+
 global posEE;
 global large_button_1
 global floor1_flat
@@ -15,15 +18,21 @@ global floor2_texturesurface1
 global floor3_viscussurface
 global floor4_texturesurface2
 global floor5_flat
-%global floor6_attractionfield
 global floor7_flat
 global floor8_gravity_fall
-global floor9_flat
+global floor9_viscussurface1
 global floor10_button
 global vsmooth
 global rad_sph
+global spx
+global spy
+global spz
+global spx_attractive
+global spy_attractive
+global spz_attractive
+global rad_sph_attractive
 
-v=vsmooth
+v=vsmooth;
 x=posEE(1);
 y=posEE(2);
 z=posEE(3);
@@ -35,12 +44,12 @@ zc=large_button_1.ZData;
 if(x<xc(1) && x<xc(2) && x<xc(3) && x<xc(4)&& ...
    y<yc(1) && y<yc(2) && y>yc(3) && y>yc(4)&& ...
    z>zc(1) && z<zc(2) && z<zc(3) && z>zc(4))
-    if((x-x(1))<10)
-    fx=-k*button_stiffness*(x-x(1));
-    elseif((x-x(1))>10&&(x-x(1))<20)
+    if((x-xc(1))<10)
+    fx=-k*button_stiffness*(x-xc(1));
+    elseif((x-xc(1))>10&&(x-xc(1))<20)
             fx=0;
     else
-        fx=-k*(x-x(1));
+        fx=-k*(x-xc(1));
     end
 fy=0;
 fz=0;
@@ -127,23 +136,22 @@ if (((x-xc)^2+(y-yc)^2+(z-zc)^2)<rad_sph^2)
     % Have to change attractive field based on how good it looks when
     % displayed
     
-    fx =-k*(x-xc(1));
-    fy=-k*(y-yc(1));
-    fz=-k*(z-zc(1));
+    fx =-ball_force*(x-xc(1));
+    fy=-ball_force*(y-yc(1));
+    fz=-ball_force*(z-zc(1));
     F=[fx;fy;fz];
 end
 
 %attractive todo
-xc=spx;
-yc=spy;
-zc=spz;
-if (((x-xc)^2+(y-yc)^2+(z-zc)^2)<rad_sph^2)
+xc=spx_attractive;
+yc=spy_attractive;
+zc=spz_attractive;
+if (((x-xc)^2+(y-yc)^2+(z-zc)^2)<rad_sph_attractive^2)
     % Have to change attractive field based on how good it looks when
     % displayed
-    
-    fx =-k*(x-xc(1));
-    fy=-k*(y-yc(1));
-    fz=-k*(z-zc(1));
+    fx =attraction_field*(x-xc(1));
+    fy=attraction_field*(y-yc(1));
+    fz=attraction_field*(z-zc(1));
     F=[fx;fy;fz];
 end
 
@@ -173,10 +181,10 @@ fz=-k*(z-zc(1));
 F=[fx;fy;fz];
 end
 
-%floor9_flat
-xc=floor9_flat.XData;
-yc=floor9_flat.YData;
-zc=floor9_flat.ZData;
+%floor9_viscussurface1
+xc=floor9_viscussurface1.XData;
+yc=floor9_viscussurface1.YData;
+zc=floor9_viscussurface1.ZData;
 if(x<xc(1) && x<xc(2) && x>xc(3) && x>xc(4)&& ...
    y<yc(1) && y>yc(2) && y>yc(3) && y<yc(4)&& ...
    z<zc(1) && z<zc(2) && z<zc(3) && z<zc(4))

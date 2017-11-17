@@ -18,7 +18,7 @@ global floor5_flat
 %global floor6_attractionfield
 global floor7_flat
 global floor8_gravity_fall
-global floor9_flat
+global floor9_viscussurface1
 global floor10_button
 global vsmooth
 global spx
@@ -64,7 +64,7 @@ floor5_flat = fill3( [sx*-200+shx sx*-200+shx sx*-600+shx sx*-600+shx],[sy*800+s
 
 floor7_flat = fill3( [sx*-200+shx sx*-200+shx sx*-100+shx sx*-100+shx],[sy*800+shy sy*400+shy sy*400+shy sy*800+shy], [sz*-200+shz sz*-200+shz sz*-200+shz sz*-200+shz], [0 1 0], 'facealpha', 0.5);
 floor8_gravity_fall = fill3( [sx*0+shx sx*0+shx sx*-100+shx sx*-100+shx],[sy*800+shy sy*400+shy sy*400+shy sy*800+shy], [sz*-300+shz sz*-300+shz sz*-300+shz sz*-300+shz], [0 1 0], 'facealpha', 0.5);
-floor9_flat = fill3([sx*0+shx sx*0+shx sx*200+shx sx*200+shx],[sy*800+shy sy*400+shy sy*400+shy sy*800+shy],  [sz*-200 sz*-200 sz*-200 sz*-200], [0 1 0], 'facealpha', 0.5);
+floor9_viscussurface1 = fill3([sx*0+shx sx*0+shx sx*200+shx sx*200+shx],[sy*800+shy sy*400+shy sy*400+shy sy*800+shy],  [sz*-200 sz*-200 sz*-200 sz*-200], [0 0 1], 'facealpha', 0.5);
 
 floor10_button = fill3( [sx*200+shx sx*200+shx sx*400+shx sx*400+shx], [sy*800+shy sy*400+shy sy*400+shy sy*800+shy], [sz*-200+shz sz*-200+shz sz*-200+shz sz*-200+shz], [1 0 0], 'facealpha', 0.8);
 told=0;

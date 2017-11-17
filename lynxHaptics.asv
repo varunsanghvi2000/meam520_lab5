@@ -15,7 +15,7 @@ global floor2_texturesurface1
 global floor3_viscussurface
 global floor4_texturesurface2
 global floor5_flat
-%global floor6_attractionfield
+global floor6_attractionfield
 global floor7_flat
 global floor8_gravity_fall
 global floor9_flat
@@ -60,7 +60,7 @@ floor3_viscussurface = fill3( [sx*-600+shx sx*-200+shx sx*-200+shx sx*-600+shx],
 
 floor4_texturesurface2 = fill3( [sx*-200+shx sx*-200+shx sx*-600+shx sx*-600+shx], [sy*400+shy sy*0+shy sy*0+shy sy*400+shy],[sz*-200+shz sz*200+shz sz*200+shz sz*-200+shz], [1 1 0], 'facealpha', 0.5);
 floor5_flat = fill3( [sx*-200+shx sx*-200+shx sx*-600+shx sx*-600+shx],[sy*800+shy sy*400+shy sy*400+shy sy*800+shy], [sz*-200+shz sz*-200+shz sz*-200+shz sz*-200+shz], [0 1 0], 'facealpha', 0.5);
-%floor6_attractionfield = fill3( [sx*-600+shx sx*-600+shx sx*-600+shx sx*-600+shx],[sy*400+shy sy*800+shy sy*800+shy sy*400+shy], [sz*-200+shz sz*-200+shz sz*0+shz sz*0+shz], [0 1 0], 'facealpha', 0.5);
+floor6_attractionfield = fill3( [sx*-600+shx sx*-600+shx sx*-600+shx sx*-600+shx],[sy*400+shy sy*800+shy sy*800+shy sy*400+shy], [sz*-200+shz sz*-200+shz sz*0+shz sz*0+shz], [0 1 0], 'facealpha', 0.5);
 
 floor7_flat = fill3( [sx*-200+shx sx*-200+shx sx*-100+shx sx*-100+shx],[sy*800+shy sy*400+shy sy*400+shy sy*800+shy], [sz*-200+shz sz*-200+shz sz*-200+shz sz*-200+shz], [0 1 0], 'facealpha', 0.5);
 floor8_gravity_fall = fill3( [sx*0+shx sx*0+shx sx*-100+shx sx*-100+shx],[sy*800+shy sy*400+shy sy*400+shy sy*800+shy], [sz*-300+shz sz*-300+shz sz*-300+shz sz*-300+shz], [0 1 0], 'facealpha', 0.5);
@@ -68,21 +68,14 @@ floor9_flat = fill3([sx*0+shx sx*0+shx sx*200+shx sx*200+shx],[sy*800+shy sy*400
 
 floor10_button = fill3( [sx*200+shx sx*200+shx sx*400+shx sx*400+shx], [sy*800+shy sy*400+shy sy*400+shy sy*800+shy], [sz*-200+shz sz*-200+shz sz*-200+shz sz*-200+shz], [1 0 0], 'facealpha', 0.8);
 told=0;
-%attractive
-[x,y,z] = sphere;
-  r=30;
-   spx=200;
-   spy=130;
-   spz=-50;
- hsphere2= surf(x*r+spx, y*r+spy, z*r+spz, 'facealpha', 0.8);
- hsphere2.EdgeColor = 'none';
- %ball
-
- [x,y,z] = sphere;
+  [x,y,z] = sphere;
   r=15;
    spx=150;
    spy=180;
    spz=-45;
+%   spx=56;
+%   spy=-120;
+%   spz=225;
  hsphere1= surf(x*r+spx, y*r+spy, z*r+spz);
 %hsphere1.get
 %hsphere1.XData
@@ -125,15 +118,14 @@ while(1)
     F = computeForces();
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     if(spy==80)
-    dir_step=5;
-    elseif(spy==180)
-    dir_step=-5;
+    
+    else
+    
     end
     %% Plot Environment
     if i == 0
         figClosed = drawLynx(h1, h2, F);
         [xhan,yhan,zhan]=sphere;
-        spy=spy+dir_step;
         set(hsphere1, 'XData',xhan*r+spx, 'YData',yhan*r+spy, 'ZData',zhan*r+spz);
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

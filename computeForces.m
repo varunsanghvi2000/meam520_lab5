@@ -15,7 +15,7 @@ global floor2_texturesurface1
 global floor3_viscussurface
 global floor4_texturesurface2
 global floor5_flat
-global floor6_attractionfield
+%global floor6_attractionfield
 global floor7_flat
 global floor8_gravity_fall
 global floor9_flat
@@ -119,20 +119,20 @@ F=[fx;fy;fz];
 end
 
 %floor6_attractionfield
-xc=floor6_attractionfield.XData;
-yc=floor6_attractionfield.YData;
-zc=floor6_attractionfield.ZData;
-if(x>xc(1) && x>xc(2) && x>xc(3) && x>xc(4)&& ...
-        y>yc(1) && y<yc(2) && y<yc(3) && y>yc(4)&& ...
-        z>zc(1) && z>zc(2) && z<zc(3) && z<zc(4))
-    % Have to change attractive field based on how good it looks when
-    % displayed
-    attractive_field = 1;
-    fx = -attractive_field * (x-xc(1));
-    fy=0;
-    fz=0;
-    F=[fx;fy;fz];
-end
+% xc=floor6_attractionfield.XData;
+% yc=floor6_attractionfield.YData;
+% zc=floor6_attractionfield.ZData;
+% if(x>xc(1) && x>xc(2) && x>xc(3) && x>xc(4)&& ...
+%         y>yc(1) && y<yc(2) && y<yc(3) && y>yc(4)&& ...
+%         z>zc(1) && z>zc(2) && z<zc(3) && z<zc(4))
+%     % Have to change attractive field based on how good it looks when
+%     % displayed
+%     attractive_field = 1;
+%     fx = -attractive_field * (x-xc(1));
+%     fy=0;
+%     fz=0;
+%     F=[fx;fy;fz];
+% end
 
 %floor7_flat
 xc=floor7_flat.XData;

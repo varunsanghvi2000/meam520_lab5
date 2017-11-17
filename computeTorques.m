@@ -20,7 +20,7 @@ theta3 = qs(3);
 
 % Compute Jacobian for each joint
 
-J2_3 = computeJacobian(theta1, theta2, theta3, a1, a2, a3, 3);
+J2_3 = computeJacobian(qs(1), qs(2), qs(3), a1, a2, a3);
 
 J2_3 = subs(J2_3);
 

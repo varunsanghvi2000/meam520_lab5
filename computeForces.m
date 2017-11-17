@@ -6,7 +6,8 @@ F = [0;0;0];
 
 %spring constant
 k=0.5;
-
+button_stiffness=0.9;
+c=0.2;
 global posEE;
 global large_button_1
 global floor1_flat
@@ -33,7 +34,13 @@ zc=large_button_1.ZData;
 if(x<xc(1) && x<xc(2) && x<xc(3) && x<xc(4)&& ...
    y<yc(1) && y<yc(2) && y>yc(3) && y>yc(4)&& ...
    z>zc(1) && z<zc(2) && z<zc(3) && z>zc(4))
-fx=-k*(x-x(1));
+    if((x-x(1))<10)
+    fx=-k*button_stiffness*(x-x(1));
+    elseif((x-x(1))>10&&(x-x(1))<20)
+            fx=0;
+    else
+        fx=-k*(x-x(1));
+    end
 fy=0;
 fz=0;
 F=[fx;fy;fz];
@@ -76,8 +83,6 @@ if(x<xc(1) && x>xc(2) && x>xc(3) && x<xc(4)&& ...
     % Have to modify c, m to check what value looks good upon displaying, and
     % t after incorporating tic-toc timeval in code
     Fn = k * (z-zc(1));
-    c = 1;
-    
     % Send in velocity vector as a [x, y, z] form, i.e., 1 x 3 
     fx=-c*Fn*v(1);
     fy=-c*Fn*v(2);
@@ -177,7 +182,13 @@ if(x<xc(1) && x<xc(2) && x>xc(3) && x>xc(4)&& ...
    z<zc(1) && z<zc(2) && z<zc(3) && z<zc(4))
 fx=0;
 fy=0;
-fz=-k*(z-zc(1));
+   if((z-zc(1))<10)
+    fz=-k*button_stiffness*(z-zc(1));
+    elseif((z-zc(1))>10&&(z-zc(1))<20)
+            fz=0;
+    else
+        fz=-k*(z-zc(1));
+   end
 F=[fx;fy;fz];
 end
 

@@ -128,21 +128,7 @@ if (((x-xc)^2+(y-yc)^2+(z-zc)^2)<rad_sph^2)
     % displayed
     
     fx =-k*(x-xc(1));
-    fy=-k*(y-yc(1));
-    fz=-k*(z-zc(1));
-    F=[fx;fy;fz];
-end
-
-%attractive todo
-xc=spx;
-yc=spy;
-zc=spz;
-if (((x-xc)^2+(y-yc)^2+(z-zc)^2)<rad_sph^2)
-    % Have to change attractive field based on how good it looks when
-    % displayed
-    
-    fx =-k*(x-xc(1));
-    fy=-k*(y-yc(1));
+    fy=-k*(y-zc(1));
     fz=-k*(z-zc(1));
     F=[fx;fy;fz];
 end

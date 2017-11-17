@@ -24,6 +24,7 @@ global vsmooth
 global spx
 global spy
 global spz
+global rad_sph
 
 figClosed = 0;
 qs = [0,0,0]; % initialize robot to zero pose
@@ -70,11 +71,11 @@ floor10_button = fill3( [sx*200+shx sx*200+shx sx*400+shx sx*400+shx], [sy*800+s
 told=0;
 %attractive
 [x,y,z] = sphere;
-  r=30;
+  rad_sph=30;
    spx=200;
    spy=130;
    spz=-50;
- hsphere2= surf(x*r+spx, y*r+spy, z*r+spz, 'facealpha', 0.8);
+ hsphere2= surf(x*rad_sph+spx, y*rad_sph+spy, z*rad_sph+spz, 'facealpha', 0.8);
  hsphere2.EdgeColor = 'none';
  %ball
 
